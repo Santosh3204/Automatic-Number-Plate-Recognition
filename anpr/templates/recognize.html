@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+
+    .content{
+        background-color:lightgreen;
+    }
+    
+    
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 90%;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      table{
+          
+      }
+
+</style>
+<body style="background-color:blue;">
+    <div class="title">
+    <center>
+        <h1 style="color: white;">
+           <marquee>Automatic Number Plate Recognition</marquee> 
+        </h1>
+    </center>
+    </div>
+    <div class="content">
+    <center>
+    <form action="{% url 'recognize_number' %}" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+        <label for="img">Select image:</label>
+        <input type="file" id="img" name="image" accept="image/*">
+        <input type="submit">
+    </form>
+    </center>
+    
+
+    <br>
+    <hr>
+    <table>
+        <tr>
+            <th>
+                Uploaded image
+            </th>
+        
+            <th>
+                Number Plate identified
+            </th>
+        
+            
+            <th>
+                Cropped Number Plate
+            </th>
+            
+            <th>
+                Extracted number
+    
+            </th>
+            
+        </tr>
+        <tr>
+            <td>
+                <img src="/media/{{uploaded_image}}" alt="car image" width="500px" height="400px">
+            </td>
+            
+            <td>
+                <img src="/media/{{car_image}}" alt="detected image" width="500px" height="400px">
+            </td>
+            
+            <td>
+                <img src="/media/{{plate_image}}" alt="plate image" width="150px" height="50px">            
+            </td>
+            
+            <td>
+                <h3 style="color: black;">{{plate_number}}</h3>
+            </td>
+        </tr>
+    </table>
+
+    
+    <!-- <img src="/media/{{car_image}}" alt="car image" width="500px" height="400px">
+    <br>
+    Recognition plate image
+    <img src="/media/{{plate_image}}" alt="plate image">
+    <br>
+    Extracted number - 
+    {{plate_number}} -->
+    <br><br>
+
+
+    </div>
+</body>
+</html>
